@@ -1,8 +1,12 @@
 from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import BaseModel
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .gestor import Gestor
 
 class User(BaseModel):
     __tablename__ = "users"
@@ -31,4 +35,9 @@ class User(BaseModel):
     google_id: Mapped[str | None] = mapped_column(
         String(255),
         nullable=True
+    )
+
+    gestor: Mapped["Gestor"] = relationship(
+        back_populates="user",
+        uselist=False
     )
