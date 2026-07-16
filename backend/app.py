@@ -1,14 +1,30 @@
 from fastapi import FastAPI
+from sqlalchemy import text
 
-app = FastAPI(
-    title="Painel Laranja API",
-    version="1.0.0"
-)
+from database.session import SessionLocal
+
+app = FastAPI()
+
 
 @app.get("/")
-async def home():
-
+def home():
     return {
         "status": "online",
         "projeto": "Painel Laranja"
     }
+
+
+@app.get("/db")
+def testar_banco():
+
+    db = SessionLocal()
+
+    try:
+        db.execute(text("SELECT 1"))
+        return {"banco": "Conectado com sucesso"}
+
+    except Exception as e:
+        return {"erro": str(e)}
+
+    finally:
+        db.close()
