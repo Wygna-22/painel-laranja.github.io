@@ -1,0 +1,9 @@
+from enum import Enum
+
+class TipoHistorico(str, Enum):
+    FEEDBACK = "FEEDBACK"
+    ELOGIO = "ELOGIO"
+    ADVERTENCIA = "ADVERTENCIA"
+    TREINAMENTO = "TREINAMENTO"
+    PROMOCAO = "PROMOCAO"
+    OBSERVACAO = "OBSERVACAO"
