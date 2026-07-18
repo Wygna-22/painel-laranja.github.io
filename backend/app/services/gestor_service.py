@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-
+from fastapi import HTTPException, status
 from app.models.enums import UserRole
 from app.models.user import User
 from app.repositories.gestor_repository import gestor_repository
@@ -34,8 +34,9 @@ class GestorService:
         )
 
         if existente:
-            raise ValueError(
-                "Já existe um gestor com este e-mail."
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Já existe um gestor com este e-mail.",
             )
 
         novo_gestor = User(

@@ -3,6 +3,7 @@ from fastapi import Depends
 from app.routers.users import router as user_router
 from app.routers.auth import router as auth_router
 from app.routers.colaborador import router as colaborador_router
+from app.routers import gestores
 from app.routers import dashboard
 from app.dependencies.auth import get_current_user
 from app.models.user import User
@@ -17,6 +18,7 @@ app = FastAPI(
 app.include_router(user_router)
 app.include_router(auth_router)
 app.include_router(colaborador_router)
+app.include_router(gestores.router)
 app.include_router(dashboard.router)
 
 @app.get("/")

@@ -41,5 +41,12 @@ class UserService:
             return None
 
         return usuario
+    
+    def get_all_gestores(self, db: Session):
+        return self.repository.get_all_gestores(db)
+
+
+    def get_gestor(self, db: Session, gestor_id):
+        return self.repository.get_gestor(db, gestor_id)
 
 user_service = UserService()
