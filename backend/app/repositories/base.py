@@ -23,7 +23,16 @@ class BaseRepository(Generic[ModelType]):
         db.delete(obj)
         db.commit()
 
-    def update(self, db: Session, obj: ModelType):
+    def update(
+        self,
+        db: Session,
+        obj: ModelType,
+        data: dict,
+    ):
+        for campo, valor in data.items():
+            setattr(obj, campo, valor)
+
         db.commit()
         db.refresh(obj)
+
         return obj 
