@@ -1,0 +1,31 @@
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo__icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 14px;
+
+    background: #F97316;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+}
+
+.logo__content h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.logo__content span {
+    font-size: 13px;
+    color: #64748B;
+}
