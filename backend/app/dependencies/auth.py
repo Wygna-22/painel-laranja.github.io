@@ -47,7 +47,19 @@ def require_role(role: UserRole):
                 status_code=403,
                 detail="Você não possui permissão para acessar este recurso.",
             )
+        return current_user
 
+    return role_checker
+
+def require_roles(*roles: UserRole):
+    def role_checker(
+        current_user=Depends(get_current_user),
+    ):
+        if current_user.perfil not in roles:
+            raise HTTPException(
+                status_code=403,
+                detail="Você não possui permissão para acessar este recurso.",
+            )
         return current_user
 
     return role_checker

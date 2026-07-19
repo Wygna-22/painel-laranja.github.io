@@ -5,8 +5,8 @@ from app.dependencies.auth import (
     get_current_user,
     require_roles,
 )
+from app.models.enums import UserRole
 from app.models.user import User
-from app.models.user import UserRole
 from app.schemas.dashboard import DashboardResponse
 from app.services.dashboard_service import dashboard_service
 
