@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi import Depends
+from fastapi.middleware.cors import CORSMiddleware
 from app.routers.users import router as user_router
 from app.routers.auth import router as auth_router
 from app.routers.colaborador import router as colaborador_router
@@ -17,6 +18,16 @@ from app.models.enums import UserRole
 app = FastAPI(
     title="Painel Laranja API",
     version="1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(user_router)

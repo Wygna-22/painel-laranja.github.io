@@ -2,31 +2,55 @@ import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
 import DashboardGrid from "../../components/DashboardGrid/DashboardGrid";
 import ChartsGrid from "../../components/ChartsGrid/ChartsGrid";
 import ChartCard from "../../components/ChartCard/ChartCard";
-import { useDashboard } from "../../hooks/useDashboard";
+
 import CollaboratorsChart from "../../components/Charts/CollaboratorsChart";
 import StatusChart from "../../components/Charts/StatusChart";
-
-import {
-  Users,
-  CalendarDays,
-  CalendarCheck,
-  UserCog,
-} from "lucide-react";
-
 import KpiCard from "../../components/KpiCard/KpiCard";
 
-// ... imports dos KPIs
+import { useDashboard } from "../../hooks/useDashboard";
+
+import {
+    Users,
+    CalendarDays,
+    CalendarCheck,
+    UserCog,
+} from "lucide-react";
 
 export default function Dashboard() {
+
+    const {
+        dashboard,
+        loading,
+        error,
+    } = useDashboard();
+
+    if (loading) {
+        return (
+            <DashboardLayout>
+                <h2>Carregando dashboard...</h2>
+            </DashboardLayout>
+        );
+    }
+
+    if (error) {
+        return (
+            <DashboardLayout>
+                <h2>Erro ao carregar dashboard</h2>
+                <p>{error}</p>
+            </DashboardLayout>
+        );
+    }
+
     return (
         <DashboardLayout>
 
             <div>
                 <h1>Dashboard</h1>
+
                 <p
                     style={{
                         color: "#64748B",
-                        marginTop: 8
+                        marginTop: 8,
                     }}
                 >
                     Resumo geral do Painel Laranja.
@@ -37,28 +61,28 @@ export default function Dashboard() {
 
                 <KpiCard
                     title="Colaboradores"
-                    value={182}
+                    value={dashboard?.total_colaboradores ?? 0}
                     color="#3B82F6"
                     icon={<Users size={28} />}
                 />
 
                 <KpiCard
-                    title="Em Férias"
-                    value={12}
+                    title="Em férias"
+                    value={dashboard?.ferias_hoje ?? 0}
                     color="#22C55E"
                     icon={<CalendarDays size={28} />}
                 />
 
                 <KpiCard
-                    title="Folgas Hoje"
-                    value={18}
+                    title="Folgas hoje"
+                    value={dashboard?.folgas_hoje ?? 0}
                     color="#F97316"
                     icon={<CalendarCheck size={28} />}
                 />
 
                 <KpiCard
-                    title="Gestores"
-                    value={15}
+                    title="Ativos"
+                    value={dashboard?.ativos ?? 0}
                     color="#A855F7"
                     icon={<UserCog size={28} />}
                 />
@@ -67,12 +91,18 @@ export default function Dashboard() {
 
             <ChartsGrid>
 
-                <ChartCard title="Colaboradores por Gestor">
-                    <CollaboratorsChart />
+                <ChartCard title="Colaboradores por setor">
+                    <CollaboratorsChart
+                        data={dashboard?.por_setor ?? []}
+                    />
                 </ChartCard>
 
-                <ChartCard title="Status Geral">
-                    <StatusChart />
+                <ChartCard title="Status geral">
+                    <StatusChart
+                        ativos={dashboard?.ativos ?? 0}
+                        afastados={dashboard?.afastados ?? 0}
+                        desligados={dashboard?.desligados ?? 0}
+                    />
                 </ChartCard>
 
             </ChartsGrid>

@@ -2,49 +2,66 @@ import {
     PieChart,
     Pie,
     Cell,
-    ResponsiveContainer
+    ResponsiveContainer,
+    Tooltip,
+    Legend,
 } from "recharts";
 
-const data = [
-    { name: "Ativos", value: 150 },
-    { name: "Férias", value: 12 },
-    { name: "Folga", value: 20 }
-];
+interface Props {
+    ativos: number;
+    afastados: number;
+    desligados: number;
+}
 
 const COLORS = [
-    "#F97316",
     "#22C55E",
-    "#3B82F6"
+    "#F97316",
+    "#EF4444",
 ];
 
-export default function StatusChart() {
+export default function StatusChart({
+    ativos,
+    afastados,
+    desligados,
+}: Props) {
+
+    const data = [
+        {
+            name: "Ativos",
+            value: ativos,
+        },
+        {
+            name: "Afastados",
+            value: afastados,
+        },
+        {
+            name: "Desligados",
+            value: desligados,
+        },
+    ];
 
     return (
-
         <ResponsiveContainer width="100%" height="100%">
-
             <PieChart>
 
                 <Pie
                     data={data}
+                    dataKey="value"
                     innerRadius={60}
                     outerRadius={90}
-                    dataKey="value"
                 >
-
                     {data.map((_, index) => (
                         <Cell
                             key={index}
                             fill={COLORS[index]}
                         />
                     ))}
-
                 </Pie>
 
+                <Tooltip />
+                <Legend />
+
             </PieChart>
-
         </ResponsiveContainer>
-
     );
-
 }

@@ -14,9 +14,14 @@ export function useDashboard() {
             try {
                 const data = await getDashboard();
                 setDashboard(data);
-            } catch {
+            } catch (err: any) {
+                console.error(err);
 
-                setError("Erro ao carregar dashboard.");
+                setError(
+                    err.response?.data?.detail ??
+                    err.message ??
+                    "Erro ao carregar dashboard."
+                );
             } finally {
 
                 setLoading(false);
