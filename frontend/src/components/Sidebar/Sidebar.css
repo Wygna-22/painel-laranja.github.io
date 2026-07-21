@@ -1,76 +1,50 @@
 .sidebar{
-    width:270px;
-    min-width:270px;
+    width:240px;
+    min-width:240px;
     height:100vh;
-
     background:#ff7a00;
     color:white;
-
     display:flex;
     flex-direction:column;
-
     padding:24px;
-
     position:sticky;
     top:0;
 }
 
 .logo{
-
     font-size:24px;
     font-weight:700;
-
     margin-bottom:45px;
-
 }
 
 .sidebar nav{
-
     display:flex;
     flex-direction:column;
-
     gap:8px;
-
     flex:1;
-
 }
 
 .sidebar a{
-
     display:flex;
     align-items:center;
     gap:12px;
-
     padding:14px 16px;
-
     color:white;
-
     border-radius:12px;
-
     transition:.25s;
-
     font-weight:500;
-
 }
 
 .sidebar a:hover{
-
     background:rgba(255,255,255,.15);
-
 }
 
 .sidebar a.active{
-
     background:white;
-
     color:#ff7a00;
-
     font-weight:600;
-
 }
 
 .logout{
-
     margin-top:auto;
-
 }

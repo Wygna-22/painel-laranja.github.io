@@ -3,6 +3,8 @@
     border:1px solid #E2E8F0;
     border-radius:16px;
     padding:24px;
+    width:100%;
+    overflow:hidden;
 }
 
 .chart-header{
@@ -16,5 +18,9 @@
 }
 
 .chart-content{
-    height:320px;
+    height:280px;
+}
+
+.chart-content.line{
+    height:360px;
 }

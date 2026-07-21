@@ -1,0 +1,19 @@
+.dashboard-card{
+    background:#fff;
+    border-radius:18px;
+    padding:22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.dashboard-card span{
+    color:#8b8b8b;
+}
+
+.dashboard-card h2{
+    margin-top:10px;
+    font-size:34px;
+    color:#202020;
+}

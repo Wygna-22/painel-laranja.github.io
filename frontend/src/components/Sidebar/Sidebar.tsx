@@ -5,6 +5,8 @@ import {
     CalendarCheck,
     FileBarChart2,
     UserCog,
+    ClipboardList,
+    Activity,
     LogOut,
 } from "lucide-react";
 
@@ -49,6 +51,16 @@ export default function Sidebar() {
                 <NavLink to="/gestores">
                     <UserCog size={20} />
                     Gestores
+                </NavLink>
+
+                <NavLink to="/indicadores">
+                    <Activity size={20}/>
+                    Indicadores
+                </NavLink>
+
+                <NavLink to="/historico">
+                    <ClipboardList size={20}/>
+                    Histórico
                 </NavLink>
 
             </nav>

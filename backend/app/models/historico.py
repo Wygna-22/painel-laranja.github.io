@@ -8,6 +8,12 @@ from app.core.database import Base
 from app.models.base import TimestampMixin
 from app.models.colaborador import Colaborador
 from app.models.tipo_historico import TipoHistorico
+from sqlalchemy import (
+    Date,
+    ForeignKey,
+    String,
+    Text,
+)
 
 class Historico(TimestampMixin, Base):
     __tablename__ = "historicos"
@@ -45,6 +51,16 @@ class Historico(TimestampMixin, Base):
     descricao: Mapped[str | None] = mapped_column(
         Text,
         nullable=True,
+    )
+
+    imagem_url: Mapped[str | None] = mapped_column(
+        String(500),
+        nullable=True,
+    )
+
+    data_evento: Mapped[date] = mapped_column(
+        Date,
+        nullable=False,
     )
 
     colaborador: Mapped[Colaborador] = relationship()

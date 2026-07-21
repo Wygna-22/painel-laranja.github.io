@@ -8,6 +8,7 @@ from app.routers import gestores
 from app.routers import ferias
 from app.routers import folga
 from app.routers import historico
+from app.routers.indicador import router as indicador_router
 from app.routers.relatorio import router as relatorio_router
 from app.routers import dashboard
 from app.dependencies.auth import get_current_user
@@ -39,6 +40,7 @@ app.include_router(folga.router)
 app.include_router(historico.router)
 app.include_router(relatorio_router)
 app.include_router(dashboard.router)
+app.include_router(indicador_router)
 
 @app.get("/")
 def root():

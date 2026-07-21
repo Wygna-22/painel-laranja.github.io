@@ -1,3 +1,21 @@
-.page {
-    padding: 40px;
+.dashboard{
+    padding:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+
+.dashboard-layout{
+    gap:24px;
+}
+
+.dashboard-bottom{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:24px;
+    margin-top:24px;
+    align-items:start;
 }

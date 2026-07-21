@@ -1,0 +1,50 @@
+.event-card{
+    background:#fff;
+    border:1px solid #E2E8F0;
+    border-radius:18px;
+    padding:24px;
+    margin-top:24px;
+    box-shadow:0 8px 20px rgba(15,23,42,.05);
+    max-height:380px;
+    overflow:hidden;
+}
+
+.event-card h3{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:24px;
+    color:#0F172A;
+}
+
+.event-content{
+    overflow-y:auto;
+    max-height:280px;
+    padding-right:8px;
+}
+
+.event-item{
+    padding:16px 0;
+    border-bottom:1px solid #E2E8F0;
+}
+
+.event-item:last-child{
+    border-bottom:none;
+}
+
+.event-title{
+    font-size:17px;
+    font-weight:700;
+    color:#0F172A;
+}
+
+.event-user{
+    margin-top:6px;
+    color:#64748B;
+    font-size:15px;
+}
+
+.event-date{
+    margin-top:4px;
+    color:#94A3B8;
+    font-size:13px;
+}
