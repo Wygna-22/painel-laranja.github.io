@@ -23,7 +23,7 @@ export default function Colaboradores() {
 
     const colaboradoresFiltrados = colaboradores.filter((colaborador) =>
         colaborador.nome.toLowerCase().includes(pesquisa.toLowerCase()) ||
-        colaborador.email.toLowerCase().includes(pesquisa.toLowerCase()) ||
+        (colaborador.email ?? "").toLowerCase().includes(pesquisa.toLowerCase()) ||
         colaborador.setor.toLowerCase().includes(pesquisa.toLowerCase()) ||
         colaborador.cidade.toLowerCase().includes(pesquisa.toLowerCase())
     );

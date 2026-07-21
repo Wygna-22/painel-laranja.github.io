@@ -13,7 +13,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function AppRoutes() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/painel-laranja.github.io">
 
             <Routes>
 
