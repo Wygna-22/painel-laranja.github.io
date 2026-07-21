@@ -20,7 +20,7 @@ export interface Indicador {
 export type IndicadorCreate = Omit<Indicador, "id">;
 export async function getIndicadores() {
     const response = await api.get<Indicador[]>(
-        "/indicadores"
+        "/indicadores/"
     );
 
     return response.data;
@@ -38,7 +38,7 @@ export async function createIndicador(
     data: IndicadorCreate
 ) {
     const response = await api.post(
-        "/indicadores",
+        "/indicadores/",
         data
     );
 
