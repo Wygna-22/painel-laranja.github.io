@@ -2,7 +2,9 @@ from uuid import UUID
 from pydantic import BaseModel, ConfigDict
 
 class IndicadorBase(BaseModel):
-    supervisao: str
+    user_id: UUID
+    mes: int
+    ano: int
     qtd_pessoas: int
     dias_atual: float
     dias_mes: float
@@ -18,10 +20,12 @@ class IndicadorCreate(IndicadorBase):
     pass
 
 class IndicadorUpdate(BaseModel):
-    supervisao: str | None = None
+    user_id: UUID | None = None
+    mes: int | None = None
+    ano: int | None = None
     qtd_pessoas: int | None = None
     dias_atual: float | None = None
-    dias_mes: float | None =None
+    dias_mes: float | None = None
     pontos: float | None = None
     ppc: float | None = None
     meta_ppc: float | None = None

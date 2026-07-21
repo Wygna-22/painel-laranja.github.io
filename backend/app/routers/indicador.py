@@ -1,12 +1,9 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.dependencies.auth import get_current_user, require_role
-from app.models.enums import UserRole
-from app.models.user import User
 from app.schemas.indicador import (
     IndicadorCreate,
     IndicadorResponse,
@@ -21,14 +18,13 @@ router = APIRouter(
 
 
 @router.post(
-    "",
+    "/",
     response_model=IndicadorResponse,
     status_code=status.HTTP_201_CREATED,
 )
 def create_indicador(
     indicador: IndicadorCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(UserRole.ADMIN)),
 ):
     return indicador_service.create(
         db,
@@ -37,12 +33,11 @@ def create_indicador(
 
 
 @router.get(
-    "",
+    "/",
     response_model=list[IndicadorResponse],
 )
 def list_indicadores(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
 ):
     return indicador_service.list_all(db)
 
@@ -54,7 +49,6 @@ def list_indicadores(
 def get_indicador(
     indicador_id: UUID,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
 ):
     return indicador_service.get(
         db,
@@ -70,7 +64,6 @@ def update_indicador(
     indicador_id: UUID,
     data: IndicadorUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(UserRole.ADMIN)),
 ):
     return indicador_service.update(
         db,
@@ -86,9 +79,10 @@ def update_indicador(
 def delete_indicador(
     indicador_id: UUID,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(UserRole.ADMIN)),
 ):
     indicador_service.delete(
         db,
         indicador_id,
     )
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

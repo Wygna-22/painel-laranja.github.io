@@ -2,7 +2,7 @@ import uuid
 
 from sqlalchemy import Boolean, Enum as SqlEnum, String
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
 from app.models.base import TimestampMixin
@@ -48,4 +48,10 @@ class User(TimestampMixin, Base):
         Boolean,
         default=True,
         nullable=False,
+    )
+
+    indicadores = relationship(
+        "Indicador",
+        back_populates="user",
+        cascade="all, delete-orphan",
     )

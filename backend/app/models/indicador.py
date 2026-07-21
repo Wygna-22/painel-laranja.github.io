@@ -1,12 +1,11 @@
 import uuid
 
-from sqlalchemy import Numeric, String
+from sqlalchemy import ForeignKey, Integer, Numeric
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
 from app.models.base import TimestampMixin
-
 
 class Indicador(TimestampMixin, Base):
     __tablename__ = "indicadores"
@@ -17,13 +16,24 @@ class Indicador(TimestampMixin, Base):
         default=uuid.uuid4,
     )
 
-    supervisao: Mapped[str] = mapped_column(
-        String(100),
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True),
+        ForeignKey("users.id"),
         nullable=False,
-        unique=True,
+    )
+
+    mes: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+    )
+
+    ano: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
     )
 
     qtd_pessoas: Mapped[int] = mapped_column(
+        Integer,
         nullable=False,
         default=0,
     )
@@ -80,4 +90,9 @@ class Indicador(TimestampMixin, Base):
         Numeric(10, 2),
         nullable=False,
         default=0,
+    )
+
+    user = relationship(
+        "User",
+        back_populates="indicadores",
     )

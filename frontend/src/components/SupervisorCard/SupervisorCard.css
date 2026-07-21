@@ -1,0 +1,96 @@
+.supervisor-card{
+    background:#fff;
+    border-radius:18px;
+    padding:22px;
+    border:1px solid #ececec;
+    transition:.25s;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.supervisor-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 24px rgba(0,0,0,.08);
+}
+
+.supervisor-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.supervisor-header h3{
+    margin:0;
+    font-size:18px;
+    color:#1F2937;
+}
+
+.supervisor-header span{
+    color:#6B7280;
+    font-size:13px;
+}
+
+.supervisor-actions{
+    display:flex;
+    gap:6px;
+}
+
+.supervisor-actions button{
+    background:none;
+    border:none;
+    cursor:pointer;
+    color:#6B7280;
+    transition:.2s;
+}
+
+.supervisor-actions button:hover{
+    color:#ff6b00;
+}
+
+.gauge-placeholder{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+}
+
+.gauge-circle{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:8px solid #ff9f1c;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    font-weight:700;
+    color:#ff6b00;
+}
+
+.metric-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.metric{
+    background:#fafafa;
+    border-radius:12px;
+    padding:14px;
+}
+
+.metric small{
+    color:#6B7280;
+    display:block;
+    margin-bottom:6px;
+}
+
+.metric strong{
+    font-size:18px;
+    color:#1F2937;
+}
+
+.danger{
+    color:#ef4444 !important;
+}
