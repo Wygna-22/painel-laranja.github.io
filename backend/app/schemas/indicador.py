@@ -36,6 +36,7 @@ class IndicadorUpdate(BaseModel):
 
 class IndicadorResponse(IndicadorBase):
     id: UUID
+    gestor: str
     model_config = ConfigDict(
         from_attributes=True,
     )

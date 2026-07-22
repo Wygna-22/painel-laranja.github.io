@@ -1,5 +1,5 @@
 import "./SupervisorCard.css";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, UserRound } from "lucide-react";
 
 interface Props {
     nome: string;
@@ -15,6 +15,7 @@ interface Props {
 
     onEdit?: () => void;
     onDelete?: () => void;
+    destaque?: boolean;
 }
 
 export default function SupervisorCard({
@@ -28,17 +29,22 @@ export default function SupervisorCard({
     meta,
     onEdit,
     onDelete,
+    destaque = false,
 }: Props) {
 
     return (
-        <div className="supervisor-card">
+       <div
+            className={`supervisor-card ${
+                destaque ? "coordenacao" : ""
+            }`}
+        >
 
             <div className="supervisor-header">
 
                 <div className="supervisor-info">
 
                     <div className="avatar">
-                        {nome.charAt(0).toUpperCase()}
+                        <UserRound size={32} strokeWidth={1.8}/>
                     </div>
 
                     <div>

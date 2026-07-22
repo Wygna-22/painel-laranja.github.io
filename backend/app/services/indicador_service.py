@@ -17,7 +17,7 @@ class IndicadorService:
         self,
         db: Session,
         indicador: IndicadorCreate,
-    ) -> Indicador:
+    ):
 
         usuario = db.get(
             User,
@@ -53,10 +53,15 @@ class IndicadorService:
             **indicador.model_dump()
         )
 
-        return indicador_repository.create(
+        indicador_criado = indicador_repository.create(
             db,
             novo_indicador,
         )
+
+        return {
+            **indicador_criado.__dict__,
+            "gestor": usuario.nome,
+        }
 
     def get(
         self,
@@ -80,9 +85,8 @@ class IndicadorService:
     def list_all(
         self,
         db: Session,
-    ) -> list[Indicador]:
-
-        return indicador_repository.get_all(db)
+    ):
+        return indicador_repository.get_all_with_gestor(db)
 
     def update(
         self,

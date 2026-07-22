@@ -27,26 +27,37 @@
 }
 
 .avatar{
-    width:46px;
-    height:46px;
+    width:64px;
+    height:64px;
     border-radius:50%;
-    background:#FFF4EC;
-    color:#ff6b00;
+    background:linear-gradient(
+        135deg,
+        #FFF4EB,
+        #FFE7D6
+    );
     display:flex;
-    justify-content:center;
     align-items:center;
-    font-weight:700;
-    font-size:18px;
+    justify-content:center;
+    color:#F97316;
+    box-shadow:0 8px 20px rgba(249,115,22,.18);
+    flex-shrink:0;
+    transition:.25s;
+}
+
+.supervisor-card:hover .avatar{
+    transform:scale(1.06);
 }
 
 .supervisor-info h3{
     margin:0;
-    font-size:18px;
+    font-size:22px;
+    font-weight:700;
+    color:#1F2937;
 }
 
 .supervisor-info span{
-    color:#6b7280;
-    font-size:14px;
+    color:#6B7280;
+    font-size:15px;
 }
 
 .supervisor-header h3{
@@ -151,4 +162,14 @@
     background:#ff9800;
     border-radius:999px;
     transition:.5s;
+}
+
+.supervisor-card.coordenacao{
+    max-width:440px;
+    width:100%;
+}
+
+.coordenacao{
+    max-width:450px;
+    width:100%;
 }

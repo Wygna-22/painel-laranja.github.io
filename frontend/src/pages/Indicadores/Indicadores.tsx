@@ -11,7 +11,6 @@ import { useIndicadores } from "../../hooks/useIndicadores";
 import IndicadorModal from "../../components/IndicadorModal/IndicadorModal";
 import { useState } from "react";
 
-
 export default function Indicadores() {
     const [openModal, setOpenModal] = useState(false);
     const {
@@ -29,28 +28,21 @@ export default function Indicadores() {
         return <h2>{error}</h2>;
     }
 
-    const totalPessoas = indicadores.reduce(
-        (acc, item) => acc + item.qtd_pessoas,
-        0,
+    const coordenacao = indicadores.find(
+            (i) => i.gestor === "Coordenação"
+        );
+
+    const gestores = indicadores.filter(
+        (i) => i.gestor !== "Coordenação"
     );
 
-    const mediaPpc =
-        indicadores.length > 0
-            ? indicadores.reduce(
-                  (acc, item) => acc + item.ppc,
-                  0,
-              ) / indicadores.length
-            : 0;
+    const totalPessoas = coordenacao?.qtd_pessoas ?? 0;
 
-    const totalPontos = indicadores.reduce(
-        (acc, item) => acc + item.pontos,
-        0,
-    );
+    const mediaPpc = coordenacao?.ppc ?? 0;
 
-    const totalMeta = indicadores.reduce(
-        (acc, item) => acc + item.meta_mes,
-        0,
-    );
+    const totalPontos = coordenacao?.pontos ?? 0;
+
+    const totalMeta = coordenacao?.meta_mes ?? 0;
 
     return (
 
@@ -100,36 +92,47 @@ export default function Indicadores() {
 
             </div>
 
+            {coordenacao && (
+                <div className="coordenacao-container">
+                    <SupervisorCard
+                        nome={coordenacao.gestor}
+                        pessoas={coordenacao.qtd_pessoas}
+                        mes={`${coordenacao.mes}/${coordenacao.ano}`}
+                        ppc={coordenacao.ppc}
+                        pontos={coordenacao.pontos}
+                        falta={coordenacao.falta_meta_mes}
+                        esp={coordenacao.esperado_atual}
+                        meta={coordenacao.meta_mes}
+                        destaque
+                    />
+                </div>
+            )}
+
             <div className="supervisores-grid">
 
-                {indicadores.map((indicador) => (
+                {gestores.map((indicador) => (
 
                     <SupervisorCard
                         key={indicador.id}
-
-                        nome={indicador.user_id}
-
+                        nome={indicador.gestor}
                         pessoas={indicador.qtd_pessoas}
-
                         mes={`${indicador.mes}/${indicador.ano}`}
-
                         ppc={indicador.ppc}
-
                         pontos={indicador.pontos}
-
                         falta={indicador.falta_meta_mes}
-
                         esp={indicador.esperado_atual}
-
                         meta={indicador.meta_mes}
                     />
+
                 ))}
-                <IndicadorModal
-                    open={openModal}
-                    onClose={() => setOpenModal(false)}
-                    onSave={createIndicador}
-                />
+
             </div>
+
+            <IndicadorModal
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                onSave={createIndicador}
+            />
         </div>
     );
 }

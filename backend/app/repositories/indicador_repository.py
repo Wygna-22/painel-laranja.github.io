@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 from app.models.indicador import Indicador
 from app.repositories.base import BaseRepository
+from app.models.user import User
 
 
 class IndicadorRepository(BaseRepository[Indicador]):
@@ -32,16 +33,56 @@ class IndicadorRepository(BaseRepository[Indicador]):
         db: Session,
         mes: int,
         ano: int,
-    ) -> list[Indicador]:
+    ):
 
-        return (
-            db.query(Indicador)
+        indicadores = (
+            db.query(
+                Indicador,
+                User.nome,
+            )
+            .join(
+                User,
+                Indicador.user_id == User.id,
+            )
             .filter(
                 Indicador.mes == mes,
                 Indicador.ano == ano,
             )
             .all()
         )
+
+        return [
+            {
+                **indicador.__dict__,
+                "gestor": nome,
+            }
+            for indicador, nome in indicadores
+        ]
+
+    def get_all_with_gestor(
+        self,
+        db: Session,
+    ):
+
+        indicadores = (
+            db.query(
+                Indicador,
+                User.nome,
+            )
+            .join(
+                User,
+                Indicador.user_id == User.id,
+            )
+            .all()
+        )
+
+        return [
+            {
+                **indicador.__dict__,
+                "gestor": nome,
+            }
+            for indicador, nome in indicadores
+        ]
 
 
 indicador_repository = IndicadorRepository()

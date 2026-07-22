@@ -2,6 +2,7 @@ import { api } from "./api";
 
 export interface Indicador {
     id: string;
+    gestor: string;
     user_id: string;
     mes: number;
     ano: number;
