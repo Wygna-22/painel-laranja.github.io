@@ -17,6 +17,7 @@
     position:sticky;
     top:0px;
     overflow:hidden;
+    height:100vh;
 }
 
 .sidebar.collapsed{
